@@ -1,0 +1,102 @@
+{% extends 'base_poll.html' %}
+
+{%block head_detail%}
+<h1>Edit Poll</h1>
+{%endblock head_detail%}
+
+{% block form_poll %}
+
+        <form method="POST" action="{% url 'edit' poll_id=poll.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject" value="{{poll.subject}}" required>
+            </div>
+            <div class="form-group">
+                <label for="detail">Detail</label>
+                <textarea type="text" class="form-control" id="detail" name="detail" rows="4">{{poll.detail}}</textarea>
+            </div>
+            {% if poll.picture %}
+                <div class="form-group">
+                    <img src="../../../{{poll.picture}}" class="rounded mx-auto d-block" height="50%" alt="">
+                </div>
+            {% endif %}
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" name="picture" value="{{poll.picture}}">
+                <label class="custom-file-label" for="customFile">Choose Picture</label>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4">
+                    <label for="start_date">Start-Date</label>
+                    <input type="datetime-local" class="form-control" id="start_date" name="start_date"
+                        value="{{poll.start_date|date:'d/m/Y h:i'}}" required>
+                        
+                </div>
+                <div class="col-md-4">
+                    <label for="end_date">End-Date</label>
+                    <input type="datetime-local" class="form-control" id="end_date" name="end_date" value="{{poll.end_date}}"
+                        required>
+                </div>
+                <div class="col-md-4">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" value="{{poll.password}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{msg}}</label>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Save</button>
+
+        </form>
+
+        {% if choice%}
+            <form action="{% url 'vote_save' poll_id=poll.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {%for choice_item in choice%}
+                    {% if choice_item.image %}
+                        <div class="form-group">
+                            <img src="../../../{{choice_item.image}}" class="rounded mx-auto d-block" height="50%" alt="">
+                        </div>
+                    {% endif %}
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="subject" name="{{choice_item.id}}" placeholder="Subject" value="{{choice_item.subject}}" required>
+                        </div>
+                        <div class="col-md-4 custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="customFile" name="{{choice_item.id}}_image" value="{{choice_item.image}}">
+                            <label class="custom-file-label" for="customFile">Choose Picture</label>
+                        </div>
+                        <div class="col-md-2">
+                            <button onclick="location.href='{%url 'choice_delete' poll_id=poll.id choice_id=choice_item.id %}'" style="background:orange;border-color:orange" class="btn btn-primary mb-3">Delete</button>
+                        </div>
+                    </div>
+                    
+                {%endfor%}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        {%endif%}
+
+        <form method="POST" action="{% url 'choice_add' poll_id=poll.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class='form-row mb-4'>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id="subject" name="choice_subject" value=""  placeholder="Subject" required>
+                </div>
+                <div class="col-md-4 custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" name="choice_image" value="">
+                    <label class="custom-file-label" for="customFile">Choose Picture</label>
+                </div>
+            </div>
+            <button type="submit" style="background:lime;border:lime;" class="btn btn-primary">Add</button>
+        </form>
+{% endblock form_poll %}
+
+
+
+{% block poll_footer %}
+    <h3>Edit By {{user.first_name}}</h3>
+{% endblock poll_footer %}

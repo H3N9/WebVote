@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="box_half">
+        <div class="box_polls">
+            {%for poll_item in poll%}
+                <div class="box_poll">
+                    <div class="box_center" onclick="location.href='{%url 'detail' poll_id=poll_item.id %}'">
+                        <div class="box_center_head">{{poll_item.subject|slice:"0:10"}}</div>
+                        <div class="box_center_detail">{{poll_item.detail|slice:"0:50"}}</div>
+                    </div>
+                    <div class="box_left" style="background:lime;" onclick="location.href='{%url 'edit' poll_id=poll_item.id %}'">Edit</div>
+                    <div class="box_left" style="background:orange;" onclick="location.href='{%url 'poll_delete' poll_id=poll_item.id %}'">Delete</div>
+                </div>
+            {%endfor%}
+        </div>
+    </div>
+{% endblock content %}

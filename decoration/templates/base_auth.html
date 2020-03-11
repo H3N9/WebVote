@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KodVote</title>
+    <link rel="stylesheet" href="{% static 'style/register.css'%}">
+    <link rel="stylesheet" href="{% static 'style/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'style/bootstrap.min.css'%}">
+    <script href="{% static 'js/bootstrap.min.js'%}" ></script>
+</head>
+<body>
+    
+    <div id="box_register">
+
+        <div class="container">
+           {%block authen%}
+            {%endblock%}
+        </div>
+
+    </div>
+
+
+</body>
+</html>

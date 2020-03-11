@@ -1,0 +1,387 @@
+body{
+    background-color: #f1f1f1;
+    margin: 0;
+}
+
+#main{
+    width: 100%;
+    height: 100%;
+}
+
+#bar{
+    width: 100%;
+    height: 10%;
+    background-color: black;
+    position: relative;
+    top:0;
+}
+.box_item{
+    width: 20%;
+    float: left;
+    position: relative;
+    height: 100%;
+    cursor: pointer;
+    transition: 0.5s;
+    color: white;
+    font-size: 4vh;
+    text-align: center;
+    padding-top: 0.5%;
+}
+.box_item:hover{
+    background-color: #2e2e2e;
+    text-decoration: underline;
+}
+#block_content{
+    margin: 2%;
+    width: 96%;
+    position: relative;
+}
+.box_half{
+    position: relative;
+    width: 100%;
+    overflow: auto;
+    clear: both;
+    
+}
+.box_text{
+    width: 100%;
+    height: 10%;
+    background-color: black;
+    color: white;
+    padding-left: 1%;
+    font-size: 3vw;
+}
+.box_item{
+    width: 20%;
+    float: left;
+    position: relative;
+    height: 100%;
+    cursor: pointer;
+}
+.box_item:hover{
+    background-color: #2e2e2e;
+}
+#block_content{
+    margin: 2%;
+    width: 96%;
+    position: relative;
+}
+.box_polls{
+    width: 100%;
+}
+.box_poll{
+    margin: 2% 0 2% 4%;
+    width: 20%;
+    height: 25vh;
+    background-color: white;
+    float: left;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0.1vh 0.1vh 2vh 0.1vh black;
+    transition: 0.5s;
+}
+.box_poll:hover{
+    box-shadow: 0.1vh 0.1vh 2.8vh 0.2vh black; 
+}
+.box_center{
+    width: 75%;
+    height: 100%;
+    position: relative;
+    float:left;
+    color: black;
+    padding: 1% 0 0 2%;
+}
+.box_center_head{
+    width: 100%;
+    height: 30%;
+    font-size: 4vh;
+}
+.box_center_detail{
+    width: 100%;
+    height: 70%;
+    font-size:3vh;
+    text-indent: 2vh;
+    overflow: hidden;
+}
+
+.box_left{
+    width: 25%;
+    height: 50%;
+    position: relative;
+    background-color: blue;
+    float: left;
+    color: white;
+    font-size: 2.5vh;
+    padding: 8% 0 0 3%;
+    transition: 0.5s;
+    
+}
+.box_left:hover{
+    opacity: 0.6;
+}
+
+.half{
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 50%;
+    background-color: red;
+}
+#block_poll{
+    width: 100%;
+    position: relative;
+    overflow: auto;
+    clear: both;
+}
+.head_detail{
+    position: relative;
+    width: 100%;
+    height: 20%;
+    background-color: black;
+    padding: 1%;
+    color: white;
+}
+.head_box{
+    position: relative;
+    width: 96%;
+    margin: 2% 2% 0 2%;
+}
+.head_footer{
+    position: relative;
+    width: 100%;
+    height: 10%;
+    background-color: black;
+    padding: 1%;
+    color: white;
+}
+
+#detail_subject{
+    width: 100%;
+    position: relative;
+    padding: 1%;
+    color: white;
+    background-color: black;
+}
+
+#detail_detail{
+    width: 100%;
+    position: relative;
+    padding: 1%;
+    text-indent: 1em;
+    font-size: 1.5em;
+    color: black;
+}
+#detail_image{
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+    padding-bottom: 5%;
+    text-align: center;
+}
+
+#block_vote{
+    background-color: black;
+    width: 100%;
+    overflow: auto;
+    clear: both;
+}
+.bound{
+    width: 100%;
+    position: relative;
+    background-color: red;
+    overflow: auto;
+    clear: both;
+}
+.box_vote{
+    width: 45%;
+    margin-left: 2.5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    float: left;
+    border: solid 0.5vw white;
+    background-color: black;
+    transition: 0.5s;
+}
+.box_vote:hover{
+    background-color: rgb(83, 83, 83);
+    border: solid 0.5vw rgb(0, 0, 0);
+}
+.radio_input{
+    width: 10%;
+    height: 10vh;
+    float: left;
+}
+.radio_input input{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 3vh;
+    width: 3vh;
+    cursor: pointer;
+    
+}
+.text_input{
+    width: 90%;
+    height: 10vh;
+    float: left;
+    color: white;
+}
+.text_input label{
+    display: block;
+    font-size: 4vh;
+    cursor: pointer;
+    padding: 2% 0 0 0;
+}
+.choice_image{
+    width: 45%;
+    margin-left: 2.5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    float: left;
+    border: solid 0.5vw white;
+    background-color: black;
+    transition: 0.5s;
+}
+.btn_vote{
+    position: relative;  
+    width: 100%;
+    padding: 1%;
+    height: 10%;
+    text-align: center;
+    background-color: black;
+}
+.btn_vote label{
+    font-size: 4vh;
+    color: white;
+}
+
+.box{
+    width: 20%;
+    height: 23vw;
+    background: white;
+    position: relative;
+    display: block;
+    float: left;
+    margin-left: 4%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    transition: 0.5s;
+    box-shadow: 0.2vw 0.2vw 0.8vw #aaaaaa;
+    overflow: hidden;
+    cursor: pointer;
+}
+.box:hover{
+    box-shadow: 0.3vw 0.3vw 1vw 0.4vw #aaaaaa;
+}
+.box-img{
+    width: 100%;
+    height: 50%;
+    position: relative;
+    text-align: center;
+}
+
+.box-img img{
+    width: 100%;
+    height: 100%;
+}
+.box-text{
+    widows: 100%;
+    background: black;
+    height: 50%;
+}
+.box-text-head{
+    width: 100%;
+    height: 20%;
+    position: relative;
+    font-size: 1.5vw;
+    color:white;
+    text-indent: 1em;
+    padding-top: 1%;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.box-text-a{
+    width: 100%;
+    height: 80%;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    font-size: 1.3vw;
+    padding: 3%;
+    text-indent: 1em;
+    padding-right: 1%;
+}
+.text_img{
+    font-size: 12vh;
+    padding-top: 10%;
+    color: black;
+}
+#graph{
+    width: 100%;
+    overflow: auto;
+    clear: both;
+}
+#show_result{
+    width: 80%;
+    border-left: 0.5vh solid black;
+    border-bottom: 0.5vh solid black;
+    border-right: 0.5vh solid black;
+    float:left;
+    margin-bottom: 5%;
+}
+#show_name{
+    width: 20%;
+    float: left;
+    margin-bottom: 5%;
+}
+.result_choice{
+    height: 8vh;
+    background-color: black;
+    margin: 2% 0 2% 0;
+    color: white;
+    font-size: 3vh;
+    text-align: center;
+}
+.name_choice{
+    width: 100%;
+    height: 8vh;
+    margin: 8% 0 8% 0;
+    font-size: 3vh;
+    background-color: black;
+    color: white;
+}
+
+@media screen and (max-width: 768px){
+    .box{
+        width: 40%;
+        height: 50vw;
+        margin-left: 6.6%;
+        margin-top: 1%;
+        margin-bottom: 2%;
+    }
+    .box-text-head{
+        font-size: 3vw;
+    }
+    .box-text-a{
+        font-size: 2vw;
+    }
+    
+}
+@media screen and (max-width:550px){
+        .box{
+            width: 80%;
+            height: 100vw;
+            margin: 1% 0 2% 10%;
+        }
+        .box-text-head{
+            font-size: 5vw;
+
+        }
+        .box-text-a{
+            font-size: 4vw;
+        }
+        
+}

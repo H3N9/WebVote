@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="block_poll">
+        <div class="head_detail">
+            {% block head_detail %}
+            {% endblock head_detail %}
+        </div>
+        <div class="head_box">
+            {% block form_poll %}
+            {% endblock form_poll %}
+        </div>
+        <div class="head_footer">
+            {% block poll_footer %}
+            {% endblock poll_footer %}
+        </div>
+    </div>
+{% endblock content %}

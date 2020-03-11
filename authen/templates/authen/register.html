@@ -1,0 +1,52 @@
+{% extends 'base_auth.html' %}
+{%block authen%}
+
+<div id="box_head">
+    <p>KodVote Register</p>
+</div>
+
+<form action="{% url 'register_user'%}" method="POST">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Username</span>
+      </div>
+      <input type="text" class="form-control" name="username" value="{{username}}" required>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Password</span>
+      </div>
+      <input type="password" class="form-control" name="password1" value="{{password1}}" required>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Password-agian</span>
+      </div>
+      <input type="password" class="form-control" name="password2" value="{{password2}}" required>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">First-Name</span>
+      </div>
+      <input type="text" class="form-control" name="fname" value="{{fname}}" required>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Last-Name</span>
+      </div>
+      <input type="text" class="form-control" name="lname" value="{{lname}}" required>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">E-mail</span>
+      </div>
+      <input type="email" class="form-control" name="email" value="{{email}}" required>
+    </div>
+
+    <input type="submit" class="btn btn-primary mr-4" style="float:left" value="Register">
+
+</form>
+<button class="btn btn-primary mr-4" onclick="location.href='{%url 'login_user'%}'">Login</button>
+{%if msg%}<h1 class="wrong">{{msg}}</h1>{%endif%}
+{%endblock%}

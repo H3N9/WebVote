@@ -1,0 +1,47 @@
+{% extends 'base_poll.html' %}
+
+{%block head_detail%}
+<h1>Create Poll</h1>
+{%endblock head_detail%}
+
+
+    {% block form_poll %}
+    
+        <form method="POST" action="{% url 'poll_add' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" value="{{poll.subject}}">
+            </div>
+            <div class="form-group">
+                <label for="detail">Detail</label>
+                <textarea type="text" class="form-control" id="detail" name="detail" placeholder="Detail" value="{{poll.detail}}"></textarea>
+            </div>
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" id="customFile" name="picture">
+                <label class="custom-file-label" for="customFile">Choose Picture</label>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4">
+                    <label for="start_date">Start-Date</label>
+                    <input type="datetime-local" class="form-control" id="start_date" name="start_date" value="{{poll.start_date}}" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="end_date">End-Date</label>
+                    <input type="datetime-local" class="form-control" id="end_date" 
+                        name="end_date" value="{{poll.end_date}}" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="{{poll.password}}">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    {% endblock form_poll %}
+
+
+    {% block poll_footer %}
+    <h3>Create By {{user.first_name}}</h3>
+    {% endblock poll_footer %}
+

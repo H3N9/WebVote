@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id="detail_subject">
+        <h1>{{poll.subject}}</h1>
+    </div>
+    <div id="detail_detail">
+        {{poll.detail}}
+    </div>
+    {%if poll.picture%}
+        <div id="detail_image">
+            <img src="../../../{{poll.picture}}" width="80%" alt="">
+        </div>
+    {%endif%}
+        
+            <form method="POST" action="{% url 'vote' poll_id=poll.id %}">
+                {% csrf_token %}
+                <div id="block_vote">
+                    {%for choice_item in choice %}
+
+                       <div class="box_vote">
+
+                                        <div class="radio_input">
+                                        {%if vote and vote.choice_id_id == choice_item.id %}
+                                            <input type="radio" id='{{choice_item.subject}}' name="choose" value="{{choice_item.id}}" checked>
+                                        {%else%}
+                                            <input type="radio" id='{{choice_item.subject}}' name="choose" value="{{choice_item.id}}"  required>
+                                            
+                                        {%endif%}
+                                        
+                                        </div>
+
+                                        <div class="text_input" >
+                                            <label for="{{choice_item.subject}}">{{choice_item.subject}}</label>
+                                        </div>
+
+                                        
+
+                                </div>
+                                {% if choice_item.image %}
+                                        <div class="choice_image">
+                                            <img src="../../../{{choice_item.image}}" class="rounded mx-auto d-block" height="50%" alt="">
+                                        </div>
+                                    {% endif %}
+                           
+                        
+                        
+
+
+                
+                    {%endfor%}
+                </div>
+
+                <input type="hidden" value="{{password}}">
+
+                    {%if ever and end and choice and key == 0 %}
+                        <div class='btn_vote'>
+                            <button type="submit" class="btn btn-primary ml-3">Vote</button>
+                        </div>
+                    {%endif%}
+
+
+            </form> 
+
+
+            {% if key and ever and end %}
+                <form action="{% url 'detail' poll_id=poll.id %}" method="POST">
+                {% csrf_token %}
+                    <div class='btn_vote'>
+                        <div class="form-group row">
+                            <div class="col-md-2"></div>
+                            <label for="password" class="col-md-2">Password</label>
+                            <div class="col-md-4">
+                                <input type="password" class="form-control" id="password" name=password>
+                            </div>
+                            <div class='col-md-1'>
+                                <button type="submit" class="btn btn-primary">Enter</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            {% endif %}
+        
+
+
+    {% if ever == 0 or end == 0 %}
+        {% if vote_choice %}
+            <div id="grahp">
+                <div id='show_result'>
+                    {% for round in  vote_choice%}
+                        {% for avg_choice in  round%}
+                            {% if forloop.last %}
+                                <div class="result_choice" style="width:{{avg_choice}}%">{{avg_choice}}%</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                <div id="show_name">
+                    {% for round in  vote_choice%}
+                        {% for avg_choice in  round%}
+                            {% if forloop.first %}
+                                <div class="name_choice">
+                                {{avg_choice}}: voted
+                            {% elif forloop.first == False and forloop.last == False %}
+                                {{avg_choice}} User</div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    {%endif%}
+
+
+
+{% endblock content %}

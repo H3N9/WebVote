@@ -1,0 +1,29 @@
+{% extends 'base_auth.html' %}
+{%block authen%}
+
+    <div id="box_head">
+        <p>KodVote Login</p>
+    </div>
+
+<form action="{% url 'login_user'%}" method="POST">
+    {% csrf_token%}
+    <div class="input-group mb-3 mt-5">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Username</span>
+      </div>
+      <input type="text" class="form-control" name="username" id="username" value="{{username}}">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text mt-2">Password</span>
+      </div>
+      <input type="password" class="form-control mt-2" name="password" id="password" value="{{password}}">
+    </div>
+    <input type="hidden" name="next_url" value="{{next_url}}">
+
+    <button type="submit" class="btn btn-primary mr-4 mt-3" style="float:left">Login</button>
+</form>
+<button class="btn btn-primary mt-3" onclick="location.href='{%url 'register_user' %}'">Register</button>
+{%if error%}<h1 class="wrong">{{error}}</h1>{%endif%}
+
+{%endblock%}

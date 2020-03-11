@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KodVote</title>
+    <link rel="stylesheet" href="{% static 'style/index.css'%}">
+    <link rel="stylesheet" href="{% static 'style/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'style/bootstrap.min.css'%}">
+    <script href="{% static 'js/bootstrap.min.js'%}" ></script>
+</head>
+<body>
+    
+    <div id='main'>
+
+        <div id="bar">
+            <div class="box_item" onclick="location.href='{%url 'index'%}'">Home</div>
+            <div class="box_item" onclick="location.href='{%url 'mine'%}'">My Poll</div>
+            <div class="box_item" onclick="location.href='{%url 'poll_add'%}'">Add Poll</div>
+            <div class="box_item" onclick="location.href='{%url 'logout_user'%}'">Logout</div>
+        </div>
+        
+        <div id="block_content">
+            {%block content%}
+            {%endblock%}
+        </div>
+        
+    </div>
+
+
+</body>
+</html>

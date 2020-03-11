@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{%block content%}
+    <div class="box_half">
+        <div class="box_text">Avaliable</div>
+        <div class="box_polls">
+            {%for poll_item in poll_av%}
+                <div class="box" onclick="location.href='{%url 'detail' poll_id=poll_item.id %}'">
+
+                    <div class="box-img">
+                        {% if poll_item.picture %}
+                            <img src="../../../{{poll_item.picture}}" alt="">
+                        {% else %}
+                            <h1 class="text_img">Poll</h1>
+                        {% endif %}
+                    </div>
+                    <div class="box-text">
+                        <div class="box-text-head">
+                            {{poll_item.subject|slice:"0:20"|truncatewords:"3"}}
+                        </div>
+                    <div class="box-text-a">
+                        {{poll_item.detail|truncatewords:"10"|slice:"0:80"}}
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+    <div class="box_half">
+        <div class="box_text">Closed</div>
+        <div class="box_polls">
+            {%for poll_item in poll_cl%}
+                <div class="box" onclick="location.href='{%url 'detail' poll_id=poll_item.id %}'">
+
+                    <div class="box-img">
+                        {% if poll_item.picture %}
+                            <img src="../../../{{poll_item.picture}}" alt="">
+                        {% else %}
+                            <h1 class="text_img">Poll</h1>
+                        {% endif %}
+                    </div>
+                    <div class="box-text">
+                        <div class="box-text-head">
+                            {{poll_item.subject|slice:"0:20"|truncatewords:"3"}}
+                        </div>
+                    <div class="box-text-a">
+                        {{poll_item.detail|truncatewords:"10"|slice:"0:80"}}
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+{% endblock content%}
+
