@@ -29,12 +29,12 @@
                 <div class="col-md-4">
                     <label for="start_date">Start-Date</label>
                     <input type="datetime-local" class="form-control" id="start_date" name="start_date"
-                        value="{{poll.start_date|date:'d/m/Y h:i'}}" required>
-                        
+                        value="{{poll.start_date|date:'Y-m-d'}}T{{poll.start_date|date:'H:i'}}" required>
+                        <!--Bug Time zone-->
                 </div>
                 <div class="col-md-4">
                     <label for="end_date">End-Date</label>
-                    <input type="datetime-local" class="form-control" id="end_date" name="end_date" value="{{poll.end_date}}"
+                    <input type="datetime-local" class="form-control" id="end_date" name="end_date" value="{{poll.end_date|date:'Y-m-d'}}T{{poll.end_date|date:'H:i'}}"
                         required>
                 </div>
                 <div class="col-md-4">
@@ -42,12 +42,9 @@
                     <input type="password" class="form-control" id="password" name="password" value="{{poll.password}}">
                 </div>
             </div>
-            <div class="form-group">
-                <label>{{msg}}</label>
-            </div>
 
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary mt-3">Save</button>
 
         </form>
 

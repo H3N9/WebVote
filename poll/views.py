@@ -1,27 +1,40 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from poll.models import Poll_Vote, Poll_Choice, Poll
 from django.contrib.auth.models import User
 from datetime import datetime
+from dateutil.parser import parse
+
+
 
 # Create your views here.
 @login_required
 def index(request):
     context = {}
-    context['poll_av'] = Poll.objects.filter(start_date__lte=datetime.now(),end_date__gte=datetime.now())
-    context['poll_cl'] = Poll.objects.exclude(start_date__lte=datetime.now(),end_date__gte=datetime.now())
+    poll_av = Poll.objects.filter(start_date__lte=datetime.now(),end_date__gte=datetime.now()).order_by('-start_date')
+    poll_cl = Poll.objects.filter(start_date__lte=datetime.now(),end_date__lt=datetime.now()).order_by('-end_date')
+    context['poll_av'] = poll_av
+    context['poll_cl'] = poll_cl
     return render(request, 'poll/index.html', context=context)
 
 @login_required
 def poll_add(request):
     context = {}
     if request.method == 'POST':
+        try:
+            start_date = parse(request.POST.get('start_date'))
+        except Exception:
+            start_date = datetime.now()
+        try:
+            end_date = parse(request.POST.get('end_date'))
+        except Exception:
+            end_date = datetime.now()
         poll = Poll.objects.create(
             subject=request.POST.get('subject'),
             detail=request.POST.get('detail'),
             picture=request.FILES.get('picture'),
-            start_date=request.POST.get('start_date'),
-            end_date=request.POST.get('end_date'),
+            start_date=start_date,
+            end_date=end_date,
             password=request.POST.get('password'),
             create_by_id=request.user.id)
         return redirect('mine')
@@ -56,7 +69,7 @@ def detail(request, poll_id):
         ever = 0
     else:
         vote = Poll_Vote.objects.none()
-    if Poll.objects.filter(id=poll_id, end_date__gte=datetime.now()):
+    if Poll.objects.filter(id=poll_id, start_date__lte=datetime.now(), end_date__gte=datetime.now()):
         end = 1
     context['key'] = key
     context['password'] = request.POST.get("password")
@@ -88,18 +101,27 @@ def edit(request, poll_id):
 
             poll.subject = request.POST.get('subject')
             poll.detail = request.POST.get('detail')
-            poll.picture = request.FILES.get('picture')
-            poll.start_date = request.POST.get('start_date')
-            poll.end_date = request.POST.get('end_date')
+            if request.FILES.get('picture'):
+                poll.picture = request.FILES.get('picture')
+            try:
+                poll.start_date = parse(request.POST.get('start_date'))
+            except Exception:
+                poll.start_date = datetime.now()
+            try:
+                poll.end_date = parse(request.POST.get('end_date'))
+            except Exception:
+                poll.end_date = datetime.now()
             poll.password = request.POST.get('password')
             poll.save()
 
 
         context['poll'] = poll
         context['choice'] = choice
+        return render(request, 'poll/edit_poll.html', context=context)
     else:
-        return redirect('login_user')  
-    return render(request, 'poll/edit_poll.html', context=context)
+        return redirect('login_user')
+        
+    
 
 @login_required
 def choice_add(request, poll_id):
@@ -145,7 +167,8 @@ def choice_save(request, poll_id):
         choice = Poll_Choice.objects.filter(poll_id_id=poll_id)
         for choice_item in choice:
             choice_item.subject = request.POST.get("%d"%choice_item.id)
-            choice_item.image = request.FILES.get("%d_image"%choice_item.id)
+            if request.FILES.get("%d_image"%choice_item.id):
+                choice_item.image = request.FILES.get("%d_image"%choice_item.id)
             choice_item.save()
             
     return redirect('/poll/edit/%s/'%poll_id)

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <div id="detail_subject">
-        <h1>{{poll.subject}}</h1>
+        <h1>{{poll.subject}} By {{user.username}}.</h1>
     </div>
     <div id="detail_detail">
         {{poll.detail}}
@@ -11,7 +11,9 @@
             <img src="../../../{{poll.picture}}" width="80%" alt="">
         </div>
     {%endif%}
-        
+    <div id="start_time">
+        {{poll.start_date}} to {{poll.end_date}}
+    </div>    
             <form method="POST" action="{% url 'vote' poll_id=poll.id %}">
                 {% csrf_token %}
                 <div id="block_vote">
@@ -19,33 +21,29 @@
 
                        <div class="box_vote">
 
-                                        <div class="radio_input">
-                                        {%if vote and vote.choice_id_id == choice_item.id %}
-                                            <input type="radio" id='{{choice_item.subject}}' name="choose" value="{{choice_item.id}}" checked>
-                                        {%else%}
-                                            <input type="radio" id='{{choice_item.subject}}' name="choose" value="{{choice_item.id}}"  required>
+                            <div class="radio_input">
+                                {%if vote and vote.choice_id_id == choice_item.id %}
+                                    <input type="radio" id='{{choice_item.subject}}' 
+                                    name="choose" value="{{choice_item.id}}" checked>
+                                {%else%}
+                                    <input type="radio" id='{{choice_item.subject}}' 
+                                    name="choose" value="{{choice_item.id}}"  required>
                                             
-                                        {%endif%}
+                                {%endif%}
                                         
-                                        </div>
+                            </div>
 
-                                        <div class="text_input" >
-                                            <label for="{{choice_item.subject}}">{{choice_item.subject}}</label>
-                                        </div>
+                            <div class="text_input" >
+                                <label for="{{choice_item.subject}}">{{choice_item.subject}}</label>
+                            </div>
 
                                         
 
-                                </div>
-                                {% if choice_item.image %}
-                                        <div class="choice_image">
-                                            <img src="../../../{{choice_item.image}}" class="rounded mx-auto d-block" height="50%" alt="">
-                                        </div>
-                                    {% endif %}
-                           
-                        
-                        
-
-
+                            {% if choice_item.image %}
+                                <img src="../../../{{choice_item.image}}" class="rounded mx-auto d-block" width='80%' height="50%" alt="">
+                                        
+                            {% endif %}
+                        </div>
                 
                     {%endfor%}
                 </div>
@@ -60,8 +58,16 @@
 
 
             </form> 
-
-
+            {% if ever == 0 %}
+                <div id="detail_subject">
+                    <h1>You have already voted.</h1>
+                </div>
+            {% elif end == 0 and ever %}
+                <div id="detail_subject">
+                    <h1>You have not voted.</h1>
+                </div>
+            {% endif %}
+            
             {% if key and ever and end %}
                 <form action="{% url 'detail' poll_id=poll.id %}" method="POST">
                 {% csrf_token %}
@@ -96,14 +102,15 @@
                 </div>
                 <div id="show_name">
                     {% for round in  vote_choice%}
+                        <div class="name_choice">{{forloop.counter}}.
                         {% for avg_choice in  round%}
                             {% if forloop.first %}
-                                <div class="name_choice">
                                 {{avg_choice}}: voted
                             {% elif forloop.first == False and forloop.last == False %}
-                                {{avg_choice}} User</div>
+                                {{avg_choice}} User
                             {% endif %}
                         {% endfor %}
+                        </div>
                     {% endfor %}
                 </div>
             </div>

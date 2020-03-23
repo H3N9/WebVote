@@ -8,8 +8,8 @@
                         <div class="box_center_head">{{poll_item.subject|slice:"0:10"}}</div>
                         <div class="box_center_detail">{{poll_item.detail|slice:"0:50"}}</div>
                     </div>
-                    <div class="box_left" style="background:lime;" onclick="location.href='{%url 'edit' poll_id=poll_item.id %}'">Edit</div>
-                    <div class="box_left" style="background:orange;" onclick="location.href='{%url 'poll_delete' poll_id=poll_item.id %}'">Delete</div>
+                    <div class="box_left"  onclick="location.href='{%url 'edit' poll_id=poll_item.id %}'">Edit</div>
+                    <div class="box_left"  onclick="location.href='{%url 'poll_delete' poll_id=poll_item.id %}'">Delete</div>
                 </div>
             {%endfor%}
         </div>
